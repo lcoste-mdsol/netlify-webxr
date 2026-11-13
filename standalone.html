@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Startup Showroom - Standalone Pure JavaScript</title>
+    <meta
+      name="description"
+      content="Standalone Pure JavaScript Showroom Product Detector & Virtual Twin AR Showcase"
+    />
+    <link rel="stylesheet" href="/src/index.css" />
+    <script>
+      window.litDisableBundleWarning = true;
+    </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.js",
+          "three/": "https://cdn.jsdelivr.net/npm/three@0.186.0/",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.0/examples/jsm/",
+          "lit": "https://esm.sh/lit@3.3.1",
+          "lit/": "https://esm.sh/lit@3.3.1/",
+          "@pmndrs/uikit": "https://cdn.jsdelivr.net/npm/@pmndrs/uikit@1.0.64/dist/index.min.js",
+          "@pmndrs/uikit-pub-sub": "https://cdn.jsdelivr.net/npm/@pmndrs/uikit-pub-sub@1.0.64/dist/index.min.js",
+          "@pmndrs/msdfonts": "https://cdn.jsdelivr.net/npm/@pmndrs/msdfonts@1.0.64/dist/index.min.js",
+          "@preact/signals-core": "https://cdn.jsdelivr.net/npm/@preact/signals-core@1.14.0/dist/signals-core.mjs",
+          "yoga-layout/load": "https://cdn.jsdelivr.net/npm/yoga-layout@3.2.1/dist/src/load.js",
+          "xrblocks": "https://cdn.jsdelivr.net/npm/xrblocks@0.24.0/build/xrblocks.js",
+          "jszip": "https://cdn.jsdelivr.net/npm/jszip@3.10.1/+esm"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- 2D DOM HUD overlay for desktop simulator & Galaxy XR status -->
+    <div id="showroom-hud" class="hud-container">
+      <div class="hud-top-bar">
+        <div class="hud-branding">
+          <span class="hud-pill">STANDALONE JS</span>
+          <span class="hud-title">Showroom AI Vision</span>
+        </div>
+        <div class="hud-status-group">
+          <a href="/" class="hud-btn" style="text-decoration:none;font-size:12px;">← Switch to Main App</a>
+          <div id="hud-connection-status" class="status-badge connected">Connecting...</div>
+          <button id="hud-voice-btn" class="hud-btn voice-btn" title="Toggle Voice Assistant">
+            <span class="mic-dot"></span>
+            <span id="hud-voice-status">Voice AI</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hud-bottom-bar">
+        <div class="hud-info-card">
+          <div class="hud-info-header">
+            <span id="hud-mode-indicator" class="mode-tag">CAMERA VIEW</span>
+            <span id="hud-detection-confidence" class="confidence-tag">Standalone Pure JS</span>
+          </div>
+          <div id="hud-current-selection" class="hud-selection-text">
+            Look at any showroom product and ask: "Recognize this product", "Select startup number 4", or "Load 3D model"
+          </div>
+          <div class="hud-actions">
+            <button id="hud-scan-btn" class="action-btn primary-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M3 9V5a2 2 0 0 1 2-2h4m10 0h4a2 2 0 0 1 2 2v4m0 10v4a2 2 0 0 1-2 2h-4M9 21H5a2 2 0 0 1-2-2v-4"></path>
+              </svg>
+              Scan & Identify
+            </button>
+            <button id="hud-twin-btn" class="action-btn secondary-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              Load 3D Virtual Twin
+            </button>
+          </div>
+          <div class="hud-voice-input-row">
+            <input id="hud-voice-input" type="text" placeholder='Voice or typed command: "Select startup number 4", "Load 3D model"...' />
+            <button id="hud-voice-send-btn">Say / Run</button>
+          </div>
+        </div>
+
+        <div class="hud-voice-hints">
+          <span class="hint-label">Try Voice Commands:</span>
+          <span class="hint-chip">"Select startup number 4"</span>
+          <span class="hint-chip">"Load the 3D model"</span>
+          <span class="hint-chip">"Recognize this product"</span>
+          <span class="hint-chip">"Scale up"</span>
+          <span class="hint-chip">"Scale down"</span>
+          <span class="hint-chip">"Animate"</span>
+          <span class="hint-chip">"Play video"</span>
+          <span class="hint-chip">"Enter VR"</span>
+          <span class="hint-chip">"Next page"</span>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/standalone/app.js"></script>
+  </body>
+</html>

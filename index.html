@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Galaxy XR Showroom Product Detector</title>
+    <meta
+      name="description"
+      content="AI-powered product detection and spatial voice assistant for showroom startup items with BM3 3D virtual twin AR overlay."
+    />
+    <meta property="og:title" content="Galaxy XR Showroom Product Detector" />
+    <meta
+      property="og:description"
+      content="AI-powered product detection and spatial voice assistant for showroom startup items with BM3 3D virtual twin AR overlay."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body>
+    <!-- 2D DOM HUD overlay for desktop simulator & Galaxy XR status -->
+    <div id="showroom-hud" class="hud-container">
+      <div class="hud-top-bar">
+        <div class="hud-branding">
+          <span class="hud-pill">GALAXY XR</span>
+          <span class="hud-title">Showroom AI Vision</span>
+        </div>
+        <div class="hud-status-group">
+          <a href="/standalone/index.html" class="hud-btn" style="text-decoration:none;font-size:12px;background:rgba(255,255,255,0.1);">Standalone JS ↗</a>
+          <div id="hud-connection-status" class="status-badge connected">Connecting...</div>
+          <button id="hud-voice-btn" class="hud-btn voice-btn" title="Toggle Voice Assistant">
+            <span class="mic-dot"></span>
+            <span id="hud-voice-status">Voice AI</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hud-bottom-bar">
+        <div class="hud-info-card">
+          <div class="hud-info-header">
+            <span id="hud-mode-indicator" class="mode-tag">CAMERA VIEW</span>
+            <span id="hud-detection-confidence" class="confidence-tag">Ready</span>
+          </div>
+          <div id="hud-current-selection" class="hud-selection-text">
+            Look at any showroom product and ask: "Recognize this product"
+          </div>
+          <div class="hud-vision-source-row">
+            <span class="vision-source-label">Vision Input:</span>
+            <input id="hud-photo-input" type="file" accept="image/*" style="display:none;" />
+            <button id="hud-upload-photo-btn" type="button" class="vision-source-btn" title="Upload a product photo to test Gemini Vision on desktop">
+              Upload Test Photo
+            </button>
+            <button id="hud-webcam-btn" type="button" class="vision-source-btn" title="Use desktop webcam feed for live product scanning">
+              Use Webcam
+            </button>
+            <button id="hud-clear-source-btn" type="button" class="vision-source-btn clear-btn" style="display:none;">
+              Clear
+            </button>
+            <div id="hud-vision-preview" class="hud-vision-preview">
+              <img id="hud-vision-preview-img" class="hud-vision-thumb" alt="Vision input preview" />
+              <video id="hud-webcam-video" class="hud-vision-thumb" autoplay muted playsinline style="display:none;"></video>
+              <span id="hud-vision-source-status" class="hud-vision-source-status">Ready</span>
+            </div>
+          </div>
+          <div class="hud-actions">
+            <button id="hud-scan-btn" class="action-btn primary-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M3 9V5a2 2 0 0 1 2-2h4m10 0h4a2 2 0 0 1 2 2v4m0 10v4a2 2 0 0 1-2 2h-4M9 21H5a2 2 0 0 1-2-2v-4"></path>
+              </svg>
+              Scan & Identify
+            </button>
+            <button id="hud-twin-btn" class="action-btn secondary-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              Load 3D Virtual Twin
+            </button>
+            <button id="hud-video-btn" class="action-btn secondary-btn" style="background: rgba(16, 185, 129, 0.25); border-color: rgba(16, 185, 129, 0.5);">
+              Load Video
+            </button>
+            <button id="hud-vr-btn" class="action-btn secondary-btn" style="background: rgba(124, 58, 237, 0.25); border-color: rgba(124, 58, 237, 0.5);">
+              Switch to VR
+            </button>
+          </div>
+          <div class="hud-voice-input-row">
+            <input id="hud-voice-input" type="text" placeholder='Voice or typed command: "Select startup number 4", "Load 3D model", "Remove the 3D model"...' />
+            <button id="hud-voice-send-btn">Say / Run</button>
+          </div>
+        </div>
+
+        <div class="hud-voice-hints">
+          <span class="hint-label">Try Voice Commands:</span>
+          <span class="hint-chip">"Select startup number 4"</span>
+          <span class="hint-chip">"Load the 3D model"</span>
+          <span class="hint-chip">"Remove the 3D model"</span>
+          <span class="hint-chip">"Recognize this product"</span>
+          <span class="hint-chip">"Load video"</span>
+          <span class="hint-chip">"Switch to VR"</span>
+          <span class="hint-chip">"Scale up"</span>
+          <span class="hint-chip">"Animate"</span>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/index.ts"></script>
+  </body>
+</html>

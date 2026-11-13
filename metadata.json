@@ -1,0 +1,11 @@
+{
+  "name": "Galaxy XR Showroom Product Detector",
+  "description": "AI-powered product detection and spatial voice assistant for showroom startup items with BM3 3D virtual twin AR overlay.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
